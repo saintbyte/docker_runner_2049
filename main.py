@@ -1,5 +1,3 @@
-import sys
-import logging
 import time
 from argparse import ArgumentParser
 from argparse import Namespace

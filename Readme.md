@@ -19,4 +19,4 @@ But first replace
 to your own keys
 
 Result:
-![image](docs/img/1.png)[]
+![result](docs/img/1.png)[]
