@@ -1,3 +1,4 @@
+import sys
 import logging
 import time
 from argparse import ArgumentParser
@@ -8,8 +9,8 @@ import docker
 from docker import DockerClient
 from docker.models.containers import Container
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+from logger import logger
+
 LOG_BUFFER_SIZE: int = 10
 
 
@@ -61,7 +62,8 @@ def clear_log_buffer(buffer: list):
     buffer.clear()
 
 
-def put_to_buffer(line, buffer):
+def put_to_buffer(record, buffer):
+    line: str = record.decode("utf-8").strip()
     buffer.append({
         "timestamp": int(round(time.time() * 1000)),
         "message": line,
@@ -95,10 +97,8 @@ def main():
     try:
         for log_record in container.logs(stream=True):
             count = count + 1
-            log_line: str = log_record.decode("utf-8")
-            logger.info(f"{count} {log_line}")
-            print(f"{count} {log_line}")
-            put_to_buffer(log_line, log_buffer)
+            logger.info(f"{count} {log_record}")
+            put_to_buffer(log_record, log_buffer)
             if len(log_buffer) >= LOG_BUFFER_SIZE:
                 send_logs(
                     aws_cloudwatch_client,
@@ -108,7 +108,7 @@ def main():
                     sequence_token,
                 )
     except KeyboardInterrupt:
-        logger.info("Receive Keyboard Interrupt")
+        logger.error("Receive Keyboard Interrupt")
     finally:
         container.stop()
         send_logs(

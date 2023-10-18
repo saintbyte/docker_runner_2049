@@ -1,5 +1,6 @@
 # Docker Runner 2049 
 
+How to run:
 
 ```bash
 python \
@@ -12,3 +13,10 @@ main.py \
 --aws-secret-access-key="x0+XxxxxXXXXXXXXXXxxx/XxxxxxxxxXxxxxxx+X" \
 --aws-region=eu-central-1
 ```
+But first replace 
+--aws-access-key-id="AXXXXXXXXXXXXXXXXXXX" \                    
+--aws-secret-access-key="x0+XxxxxXXXXXXXXXXxxx/XxxxxxxxxXxxxxxx+X" \
+to your own keys
+
+Result:
+![image](docs/img/1.png)[]
