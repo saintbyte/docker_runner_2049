@@ -16,7 +16,10 @@ main.py \
 But first replace 
 --aws-access-key-id="AXXXXXXXXXXXXXXXXXXX" \                    
 --aws-secret-access-key="x0+XxxxxXXXXXXXXXXxxx/XxxxxxxxxXxxxxxx+X" \
-to your own keys
+to your own keys.
 
 Result:
-![result](docs/img/1.png)[]
+![result](docs/img/1.png)
+
+### Configuration
+To change size of record buffer change LOG_BUFFER_SIZE in main.py file. it's by default 10.
